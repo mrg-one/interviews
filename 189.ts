@@ -3,11 +3,14 @@
  */
 
  function rotate(nums: number[], k: number): void {
-    k = k % nums.length;
-    [ ...nums.slice(-k), ...nums.slice(0, k + 1)].slice(0, nums.length).forEach(
-        (val, i) => nums[i] = val);
+    const dummy = [] as number[]
+
+    for (let i = 0; i < nums.length; i++) {
+        dummy[i + k >= nums.length ? (i + k - nums.length) % nums.length : i + k] = nums[i]
+    }
+    dummy.forEach((v, i) => nums[i] = v)
  };
 
- const nums189 = [1,2], k = 3
+ const nums189 = [-1], k = 2
  rotate(nums189, k)
  console.table(nums189)
