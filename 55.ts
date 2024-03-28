@@ -1,18 +1,20 @@
 function canJump(nums: number[]): boolean {
+    let lastJump = nums.length - 1
 
-    if(nums.length === 0 || nums.length === 1)
-        return true
-   
-    nums = nums.filter(v => v !== 1)
-    for (let index = 0; index < nums.length; index++) {
-        if(nums[index] === 0)
-            return index === nums.length - 1
-        if( nums[index + 1] - nums[index] > nums[index])
-            return false
+    for (let i = lastJump - 1; i > 0; i--) {
+        if (nums[i] >= lastJump - i) {
+            lastJump = i
+        }
     }
 
-    return true
+    return nums[0] >= lastJump
 };
 
-const nums55 = [0,1]
-console.log(canJump(nums55))
+const nums55 = [
+    [2,3,1,1,4],
+    [3,2,1,0,4],
+    [0,1],
+    [2,0],
+    [2,3,1,1,4]
+]
+console.log(canJump(nums55[4]))
